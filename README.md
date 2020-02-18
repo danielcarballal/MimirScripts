@@ -8,7 +8,7 @@ When teaching an introduction class with 120 students, Mimir is a great tool for
 
 ## Plagarism tool
 
-Mimir generates plagarism reports based off of their [Glitner algorithm](https://www.mimirhq.com/classroom/plagiarism-detection). This creates a percentage score between each pair of students and reports back all occurences above some instructor-set percentile. This becomes exponentially larger as the number of students increases, so this tool aggregates multiple plagarism reports and detects repeated student-pairs that across auto-plagarism reports.
+Mimir generates plagarism reports based off of the [Glitner algorithm](https://www.mimirhq.com/classroom/plagiarism-detection). This creates a percentage score between each pair of students and reports back all occurences above some instructor-set percentile. This becomes exponentially larger as the number of students increases, so this tool aggregates multiple plagarism reports and detects repeated student-pairs that across auto-plagarism reports.
 
 [Insert screenshot here]
 
