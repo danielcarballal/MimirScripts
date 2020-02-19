@@ -4,7 +4,7 @@ Python scripts for managing a Mimir classroom.
 
 ## Motivation
 
-When teaching an introduction class with 120 students, Mimir is a great tool for uploading code with built-in unit tests. However, I found the integration with Blackboard lacking and the plagarism tool too inaccurate, so these hacky solutions were generated.
+When teaching an introduction class with 120 students, I used Mimir to deploy problem sets. Mimir is a great tool for uploading code with built-in unit tests. However, I found the integration with Blackboard lacking and the plagarism tool too inaccurate, so these solutions were bord.
 
 ## Plagarism tool
 
@@ -18,18 +18,16 @@ First find your user session ID and user session token in Mimir. Follow [these i
 
 After creating a submission and having student submissions, navigate to the "Plagarism" tab of the project and click "Check for Plagarism". This will generate a plagarism report with a unique URL sent to your email address. 
 
-[Insert screenshot here]
-
-Mimir currently does not support downloading plagarism reports. The Mimir web scraper uses Chromium web browser to scrape this data and store it in raw txt files.
+Mimir currently does not support downloading plagarism reports. The Mimir web scraper uses Chromium web browser to scrape this data and store it in csv files.
 
 Usage:
 ``` 
-python mimir_web_scraper.py url1,url2,url3...
+python mimir_web_scraper.py -o output.csv url
 ```
 
 The plagarism tool takes all URLs and generates a report of <student_name, student_name> pairs with repeated copied occurences. The script ranks them based on a point value defined in plagarism_constants.xml.
 
 Usage:
 ```
-python mimir_cross_check.py txtfile1,txtfile2,txtfile3
+python mimir_cross_check.py csvfile1,csvfile2,csvfile3
 ``` 
