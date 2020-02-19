@@ -1,24 +1,14 @@
-"""
-Module to scrape data from a Mimir plagarism report to a local csv file.
+"""Module to scrape data from a Mimir plagarism report to a local csv file.
 
 Requires the following:
    - Chromium
-   - $PATH pointing to a chrome version -- Chrome 70 and 73 supported.
+   - $PATH pointing to a chrome version -- Chrome versions 70 and 73 supported.
    - Mimir user agent tokens added to plagarism_constants.
 
 python 2.7 and python3 supported.
-
-Usage:
-
-python mimir_web_scraper.py <options> class.mimir.io/plagarism/deadbeef
-
-Options:
--o Output file name to write to. Defaults to output.csv.
--m Maximum number of table pages to traverse. Defaults to maxint.
-
-Navigates to 
 """
 
+import argparse
 from selenium import webdriver
 from selenium.common.exceptions import InvalidCookieDomainException
 from sys import flags
@@ -26,6 +16,14 @@ from sys import maxint
 
 import plagarism_constants
 
+parser = argparse.ArgumentParser(
+	description="Module to scrape data from a Mimir plagarism report locally")
+parser.add_argument("url", metavar="url", type=str, 
+	help="URL to scrape - class.mimir.io/plagarism/foobar")
+parser.add_argument("-o", dest="output", type=str, help="Output file")
+parser.add_argument("-m", dest="max_page_count", type=int, default=maxint,
+	help="Max number of pages to traverse")
+args = parser.parse_args()
 
 # Loads Mimir URL and adds tokens.
 def navigate_to_mimir_with_coookies(
@@ -122,7 +120,5 @@ def traverse_plagarism_counts(driver, output_file, max_page_count):
 if __name__ == "__main__":
 	driver = sign_in_to_chrome_browser()
 	page = flags.FLAG[0]
-	tofix = flags.option("-o", "output.csv")
-	tofix2 = flags.option("-m", maxint)
-	output_file = open(tofix, "w")
-	traverse_plagarism_counts(driver, output_file, maxint)
+	output_file = open(args.output, "w")
+	traverse_plagarism_counts(driver, output_file, args.max_page_count)

@@ -1,14 +1,13 @@
-"""
-Module for finding repeated occurences across plagarism reports.
-
-Usage:
-
-python plagarism_cross_check.py output1.csv,output2.csv
-"""
-
+"""Module for finding repeated occurences across plagarism reports."""
+import argparse
 from sys import flags
 
 import plagarism_constants
+
+parser = argparse.ArgumentParser(
+	description="Module to find repeat occurences across plagarism reports")
+parser.add_argument("filelist", type=str, help="List of csv files.")
+args = parser.parse_args()
 
 # Util function to pretty print list of tuple occurences.
 def print_occurences(student_tuple, plagarism_occurences):
@@ -118,7 +117,6 @@ In {assignment} these students matched {percentage} according to Mimir.
 			self.plagarism_check[record.student_tuple()] = [score, record]
 
 	def add_file(self, fname):
-		fname = "testdata/" + fname
 		p_file = open(fname, "r")
 		p_record = p_file.readline()
 		while p_record:
@@ -156,7 +154,7 @@ In {assignment} these students matched {percentage} according to Mimir.
 
 
 if __name__ == "__main__":
-	files = flags[0].split(",")
+	files = args.filelist.split(",")
 	pcc = PlagarismCrossCheck()
 	for f in files: # List of record files
 		pcc.add_file(f)
